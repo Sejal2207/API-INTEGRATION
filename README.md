@@ -31,7 +31,8 @@ How It Works:
 When the user enters a city and clicks the button, the fetch function sends a request to the OpenWeatherMap API with the city name and API key.
 The weather data is then processed and displayed dynamically on the webpage. If the city is not found or there's an error, a corresponding message will be shown.
 
-
+# output of the task
+![Image](https://github.com/user-attachments/assets/785deea4-f642-45bc-be00-3bff240796c9)
 
 
 
