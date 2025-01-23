@@ -1,0 +1,132 @@
+#html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather API Integration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Information</h1>
+        <div class="weather-info">
+            <input type="text" id="city" placeholder="Enter City" />
+            <button id="fetch-weather">Get Weather</button>
+        </div>
+        <div id="weather-details">
+            <!-- Weather data will be displayed here -->
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+#css
+/* Basic styling for container */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Weather input and button */
+.weather-info input {
+    padding: 10px;
+    font-size: 16px;
+    width: 70%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+
+.weather-info button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Display weather data */
+#weather-details {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .weather-info input {
+        width: 60%;
+    }
+}
+
+#js
+// Set up the API URL and key (replace with your OpenWeatherMap API key)
+const apiKey = 'YOUR_API_KEY';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+// Get DOM elements
+const cityInput = document.getElementById('city');
+const fetchButton = document.getElementById('fetch-weather');
+const weatherDetails = document.getElementById('weather-details');
+
+// Function to fetch weather data
+async function getWeather(city) {
+    try {
+        const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+        
+        if (data.cod === 200) {
+            // Successfully fetched data, display weather info
+            displayWeather(data);
+        } else {
+            weatherDetails.innerHTML = `<p>City not found. Please try again.</p>`;
+        }
+    } catch (error) {
+        weatherDetails.innerHTML = `<p>Error fetching data. Please try again later.</p>`;
+    }
+}
+
+// Function to display weather data
+function displayWeather(data) {
+    const weatherContent = `
+        <h2>${data.name}, ${data.sys.country}</h2>
+        <p><strong>Temperature:</strong> ${data.main.temp} °C</p>
+        <p><strong>Weather:</strong> ${data.weather[0].description}</p>
+        <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+        <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+    `;
+    weatherDetails.innerHTML = weatherContent;
+}
+
+// Event listener for the button
+fetchButton.addEventListener('click', () => {
+    const city = cityInput.value.trim();
+    if (city) {
+        getWeather(city);
+    } else {
+        weatherDetails.innerHTML = `<p>Please enter a city name.</p>`;
+    }
+});
