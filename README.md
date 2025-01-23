@@ -13,4 +13,4 @@
 **MENTOR NAME** : NEELA SANTHOSH
 
 # ABOUT ME
-my name is sejal gupta.i am pursuing b tech from siddartha institute of science and technology,currently studying in 3rd year.i am enjoying this internship with codtech.
+My name is Sejal Gupta.I am pursuing b.tech from Siddartha Institute of Science and Technology,currently studying in 3rd year.I am enjoying this internship with codtech IT Solutions. 
