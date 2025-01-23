@@ -32,3 +32,6 @@ When the user enters a city and clicks the button, the fetch function sends a re
 The weather data is then processed and displayed dynamically on the webpage. If the city is not found or there's an error, a corresponding message will be shown.
 
 
+
+
+
